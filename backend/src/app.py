@@ -4,7 +4,7 @@ from flask_cors import CORS
 from models import db
 
 app = Flask(__name__)
-app.url.map.stric_slashes = False
+
 app.config['DEBUG'] = True
 app.congfig['ENV'] = 'development'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
