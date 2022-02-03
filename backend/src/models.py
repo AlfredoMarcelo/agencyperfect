@@ -3,14 +3,19 @@ import datetime
 
 db=SQLAlchemy()
 
+class RolUser(db.Model):
+    __tablename__="rols_Users"
+    role_id = db.Column(db.Integer,db.ForeingKey("rols.id", ondelete="CASCADE"),primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeingKey("rols.id", ondelete="CASCADE"),primary_key=True)
+
 
 class User(db.Model):
     __tablename__="users"
     id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(100))
-    lastname = db.Column(db.String(100))
-    email = db.Column(db.String(100),unique=True)
-    password = db.Column(db.String(200))
+    name = db.Column(db.String(100), nullable=False)
+    lastname = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100),unique=True,nullable=False)
+    password = db.Column(db.String(200),nullable=False)
     rol_id = db.Column(db.Integer,db.ForeignKey("Rol.id"))
     comentary_id = db.Column(db.Integer,db.ForeignKey("Comentary.id"))
 
