@@ -4,7 +4,7 @@ import datetime
 db=SQLAlchemy()
 
 class RolUser(db.Model):
-    __tablename__="rols_Users"
+    __tablename__="rols_users"
     role_id = db.Column(db.Integer,db.ForeingKey("rols.id", ondelete="CASCADE"),primary_key=True)
     user_id = db.Column(db.Integer,db.ForeingKey("rols.id", ondelete="CASCADE"),primary_key=True)
 
@@ -12,12 +12,14 @@ class RolUser(db.Model):
 class User(db.Model):
     __tablename__="users"
     id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String(100), nullable=False)#nullable=False obliga a rellenar el campo al usuario
     lastname = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100),unique=True,nullable=False)
     password = db.Column(db.String(200),nullable=False)
+    active = db.Column(db.boolean, default=True)
     rol_id = db.Column(db.Integer,db.ForeignKey("Rol.id"))
     comentary_id = db.Column(db.Integer,db.ForeignKey("Comentary.id"))
+    project = db.relationship('Project', cascade="all, delete")
 
 
     def save(self):
@@ -34,8 +36,8 @@ class User(db.Model):
 class Rol(db.Model):
     __tablename__="rols"
     id = db.Column(db.Integer,primary_key=True)
-    rolname = db.Column(db.String(100))
-
+    name = db.Column(db.String(100),nullable=False, unique=True)
+    users = db.relationship("User", cascade="all, delete",secondary="rols_users")
     def save(self):
         db.session.add(self)
         db.session.commit()
@@ -51,8 +53,9 @@ class Project(db.Model):
     __tablename__="projects"
     id = db.Column(db.String,primary_key=True)
     projectname = db.Column(db.String(100))
-    description = db.Column(db.String(250))
+    description = db.Column(db.Text)
     date = db.Column(datetime.datetime.now())
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id", ondelete="CASCADE"))
 
     def save(self):
         db.session.add(self)
@@ -83,8 +86,10 @@ class Category(db.Model):
 
 class Comentary(db.Model):
     __tablename__="comentaries"
-    comment=db.Column(db.String(150))
-    date = db.Column(datetime.datetime.now())
+    comment=db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id", ondelete="CASCADE"))
+    project_id = db.Column(db.Integer, db.ForeignKey("users.id", ondelete="CASCADE"))
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def save(self):
         db.session.add(self)
