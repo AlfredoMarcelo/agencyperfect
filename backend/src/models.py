@@ -5,8 +5,8 @@ db=SQLAlchemy()
 
 class RolUser(db.Model):
     __tablename__="rols_users"
-    role_id = db.Column(db.Integer,db.ForeingKey("rols.id", ondelete="CASCADE"),primary_key=True)
-    user_id = db.Column(db.Integer,db.ForeingKey("rols.id", ondelete="CASCADE"),primary_key=True)
+    role_id = db.Column(db.Integer,db.ForeignKey("rols.id", ondelete="CASCADE"),primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey("rols.id", ondelete="CASCADE"),primary_key=True)
 
 
 class User(db.Model):
@@ -16,9 +16,9 @@ class User(db.Model):
     lastname = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100),unique=True,nullable=False)
     password = db.Column(db.String(200),nullable=False)
-    active = db.Column(db.boolean, default=True)
-    rol_id = db.Column(db.Integer,db.ForeignKey("Rol.id"))
-    comentary_id = db.Column(db.Integer,db.ForeignKey("Comentary.id"))
+    active = db.Column(db.Boolean, default=True)
+    rol_id = db.Column(db.Integer,db.ForeignKey("rols.id"))
+    comentary_id = db.Column(db.Integer,db.ForeignKey("comentaries.id"))
     project = db.relationship('Project', cascade="all, delete")
 
 
@@ -54,7 +54,7 @@ class Project(db.Model):
     id = db.Column(db.String,primary_key=True)
     projectname = db.Column(db.String(100))
     description = db.Column(db.Text)
-    date = db.Column(datetime.datetime.now())
+    created_at = db.Column(db.DateTime,default=datetime.datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id", ondelete="CASCADE"))
 
     def save(self):
@@ -69,9 +69,10 @@ class Project(db.Model):
         db.session.commit()
 
 class Category(db.Model):
-    __tablename__="catergories"
+    __tablename__="categories"
+    id = db.Column(db.String,primary_key=True)
     title = db.Column(db.String(100))
-    project_id = db.Column(db.Integer, db.ForeignKey("Project.id"))
+    project_id = db.Column(db.Integer, db.ForeignKey("projects.id"))
 
     def save(self):
         db.session.add(self)
@@ -86,9 +87,10 @@ class Category(db.Model):
 
 class Comentary(db.Model):
     __tablename__="comentaries"
+    id = db.Column(db.Integer,primary_key=True)
     comment=db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id", ondelete="CASCADE"))
-    project_id = db.Column(db.Integer, db.ForeignKey("users.id", ondelete="CASCADE"))
+    project_id = db.Column(db.Integer, db.ForeignKey("projects.id", ondelete="CASCADE"))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def save(self):
