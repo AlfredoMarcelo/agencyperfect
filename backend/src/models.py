@@ -6,7 +6,7 @@ db=SQLAlchemy()
 class RolUser(db.Model):
     __tablename__="rols_users"
     role_id = db.Column(db.Integer,db.ForeignKey("rols.id", ondelete="CASCADE"),primary_key=True)
-    user_id = db.Column(db.Integer,db.ForeignKey("rols.id", ondelete="CASCADE"),primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id", ondelete="CASCADE"),primary_key=True)
 
 
 class User(db.Model):
@@ -16,12 +16,23 @@ class User(db.Model):
     lastname = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100),unique=True,nullable=False)
     password = db.Column(db.String(200),nullable=False)
+    image = db.Column(db.String(5000))
     active = db.Column(db.Boolean, default=True)
     rol_id = db.Column(db.Integer,db.ForeignKey("rols.id"))
     comentary_id = db.Column(db.Integer,db.ForeignKey("comentaries.id"))
     project = db.relationship('Project', cascade="all, delete")
+    rols = db.relationship("Rol", cascade="all,delete", secondary="rols_users")
 
 
+    def serialize(self):
+        return{
+            "id": self.id,
+            "name": self.name,
+            "lastname": self.lastname,
+            "email": self.email,
+            "password": self.password,
+            "image": self.image
+        }
     def save(self):
         db.session.add(self)
         db.session.commit()
@@ -38,6 +49,7 @@ class Rol(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(100),nullable=False, unique=True)
     users = db.relationship("User", cascade="all, delete",secondary="rols_users")
+
     def save(self):
         db.session.add(self)
         db.session.commit()
@@ -54,6 +66,7 @@ class Project(db.Model):
     id = db.Column(db.String,primary_key=True)
     projectname = db.Column(db.String(100))
     description = db.Column(db.Text)
+    project_image= db.Column(db.String(5000))
     created_at = db.Column(db.DateTime,default=datetime.datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id", ondelete="CASCADE"))
 

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 37ba8c7e05ba
+Revision ID: 713a93865526
 Revises: 
-Create Date: 2022-02-03 17:44:06.330325
+Create Date: 2022-02-04 14:19:32.688253
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '37ba8c7e05ba'
+revision = '713a93865526'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,6 +32,7 @@ def upgrade():
     sa.Column('id', sa.String(), nullable=False),
     sa.Column('projectname', sa.String(length=100), nullable=True),
     sa.Column('description', sa.Text(), nullable=True),
+    sa.Column('project_image', sa.String(length=5000), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
@@ -49,6 +50,7 @@ def upgrade():
     sa.Column('lastname', sa.String(length=100), nullable=False),
     sa.Column('email', sa.String(length=100), nullable=False),
     sa.Column('password', sa.String(length=200), nullable=False),
+    sa.Column('image', sa.String(length=5000), nullable=True),
     sa.Column('active', sa.Boolean(), nullable=True),
     sa.Column('rol_id', sa.Integer(), nullable=True),
     sa.Column('comentary_id', sa.Integer(), nullable=True),
@@ -68,7 +70,7 @@ def upgrade():
     sa.Column('role_id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['role_id'], ['rols.id'], ondelete='CASCADE'),
-    sa.ForeignKeyConstraint(['user_id'], ['rols.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('role_id', 'user_id')
     )
     # ### end Alembic commands ###
