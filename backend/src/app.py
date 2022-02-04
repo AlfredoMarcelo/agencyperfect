@@ -1,9 +1,8 @@
 from flask import Flask, jsonify, render_template,request
-from itsdangerous import json
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, jwt_required
-from models import db,User,Project,Rol,RolUser
+from models import db,User,Project,Rol,RolUser,Comentary
 
 app = Flask(__name__)
 
@@ -55,12 +54,12 @@ def register():
 @app.route('/api/create_project', methods=['POST'])
 def create_project():
     if request.method == "POST":
-        projectname = request.json.get("projectname")
+        project_name = request.json.get("projectname")
         description = request.json.get("description")
         project_image = request.json.get("project_image")
 
         project = Project()
-        project.projectname = project
+        project.projectname = project_name
         project.description = description
         project.project_image = project_image
         project.save()
