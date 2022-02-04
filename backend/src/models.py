@@ -8,16 +8,16 @@ class RolUser(db.Model):
     role_id = db.Column(db.Integer,db.ForeignKey("rols.id", ondelete="CASCADE"),primary_key=True)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id", ondelete="CASCADE"),primary_key=True)
 
-def save(self):
-    db.session(self)
-    db.session.commit()
+    def save(self):
+        db.session(self)
+        db.session.commit()
 
-def update(self):
-    db.commit()
+    def update(self):
+        db.session.commit()
 
-def delete(self):
-    db.session.delete(self)
-    db.session.commit()
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
 
 class User(db.Model):
     __tablename__="users"
@@ -59,6 +59,16 @@ class Rol(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(100),nullable=False, unique=True)
     users = db.relationship("User", cascade="all, delete",secondary="rols_users")
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "users": self.get_users()
+        }
+
+    def get_users(self):
+        return list(map(lambda user: user.serialize(), self.users))
 
     def save(self):
         db.session.add(self)
