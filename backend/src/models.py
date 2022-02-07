@@ -30,7 +30,7 @@ class User(db.Model):
     active = db.Column(db.Boolean, default=True)
     rol_id = db.Column(db.Integer,db.ForeignKey("rols.id"))
     comentary_id = db.Column(db.Integer,db.ForeignKey("comentaries.id"))
-    projects = db.relationship('Project', cascade="all, delete")
+    projects = db.relationship('Project', cascade="all, delete", backref="user")
     rols = db.relationship("Rol", cascade="all,delete", secondary="rols_users")
 
 
@@ -88,9 +88,12 @@ class Project(db.Model):
     description = db.Column(db.Text)
     project_image= db.Column(db.String(5000))
     created_at = db.Column(db.DateTime,default=datetime.datetime.utcnow)
-    category_id = db.Column(db.Integer,db.ForeignKey("categories.id",ondelete="CASCADE"))
     user_id = db.Column(db.Integer,db.ForeignKey("users.id", ondelete="CASCADE"))
-    comentaries = db.relationship("Comentary", backref="project")
+    category_id = db.Column(db.Integer,db.ForeignKey("categories.id", ondelete="CASCADE"))
+    comentaries = db.relationship("Comentary", backref="project", uselist=False)
+    category = db.relationship("Category", backref="project", uselist=False)
+    
+    
 
     def serialize(self):
         return {
@@ -128,9 +131,8 @@ class Project(db.Model):
 
 class Category(db.Model):
     __tablename__="categories"
-    id = db.Column(db.String,primary_key=True)
+    id = db.Column(db.Integer,primary_key=True)
     title = db.Column(db.String(100))
-    project_id = db.Column(db.Integer, db.ForeignKey("projects.id"))
 
     def serialize(self):
         return{

@@ -21,7 +21,7 @@ CORS(app)
 def index():
     return render_template("index.html")
 
-@app.route('/api/users/register', methods=['POST'])
+@app.route('/api/register', methods=['POST'])
 def register():
     if request.method == 'POST':
 
@@ -40,7 +40,7 @@ def register():
         user.save()
         return jsonify({"mensaje":"Se ha completado el registro con exito"}),200
 
-@app.route('/api/users/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def login():
     if request.method == 'POST':
         email = request.json.get("email")
@@ -50,7 +50,7 @@ def login():
         if not password: return jsonify({"password": "El password es requerido"}), 422
 
 
-@app.route('/api/users/update/<int:id>', methods=['PUT'])
+@app.route('/api/update/<int:id>', methods=['PUT'])
 def update_user(id):
     name = request.json.get("name")
     lastname = request.json.get("lastname")
@@ -69,36 +69,36 @@ def update_user(id):
     return jsonify(user.serialize()), 200
 
 
-@app.route('/api/users/all', methods=['GET'])
+@app.route('/api/users_all', methods=['GET'])
 def all_users():
     users = User.query.all()
     users = list(map(lambda user:user.serialize(),users))
     return jsonify(users),200
 
 
-@app.route('/api/project/create', methods=['POST'])
+@app.route('/api/projects/create', methods=['POST'])
 def create_project():
     if request.method == "POST":
-        project_name = request.json.get("projectname")
+        project_name = request.json.get("project_name")
         description = request.json.get("description")
         project_image = request.json.get("project_image")
 
         project = Project()
-        project.projectname = project_name
+        project.project_name = project_name
         project.description = description
         project.project_image = project_image
         project.save()
         return jsonify({"mensaje":"El projecto fue creado con exito"})
 
-@app.route('/api/project/all', methods=['GET'])
+@app.route('/api/projects/all', methods=['GET'])
 def all_projects():
     projects = Project.query.all()
     projects = list(map(lambda project:project.serialize(),projects))
     return jsonify(projects), 200
 
 
-@app.route('/api/create_comentary', methods=['GET','POST'])
-def create_comentary():
+@app.route('/api/comentaries/create', methods=['GET','POST'])
+def create_comentaries():
     if request.method == "POST":
         comment = request.json.get("comment")
         
