@@ -31,6 +31,10 @@ def register():
         password = request.json.get("password")
         image = request.json.get("image","")
 
+        if not email: return jsonify({"msg":"Debe ingresar un email para registrarse"}), 400
+        user = User.query.filter_by(email=email).first()
+        if user: return jsonify({"msg":"El email ya está en uso"}),400
+
         user = User()
         user.name = name
         user.lastname = lastname
@@ -88,7 +92,7 @@ def create_project():
         project.description = description
         project.project_image = project_image
         project.save()
-        return jsonify({"mensaje":"El projecto fue creado con exito"})
+        return jsonify({"mensaje":"El project fue creado con exito"})
 
 @app.route('/api/projects/all', methods=['GET'])
 def all_projects():
