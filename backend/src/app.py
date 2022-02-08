@@ -2,6 +2,7 @@ from flask import Flask, jsonify, render_template,request
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, jwt_required
+from itsdangerous import json
 from models import db,User,Project,Rol,RolUser,Comentary
 
 app = Flask(__name__)
@@ -52,7 +53,6 @@ def login():
         if not email: return jsonify({"email": "El email es requerido"}), 422
         if not password: return jsonify({"password": "El password es requerido"}), 422
 
-
 @app.route('/api/update/<int:id>', methods=['PUT'])
 def update_user(id):
     name = request.json.get("name")
@@ -86,9 +86,29 @@ def all_users():
     return jsonify(users),200
 
 
-@app.route('/api/projects/create', methods=['POST'])
-def create_project():
-    if request.method == "POST":
+@app.route('/api/projects/all', methods=['GET'])
+def all_projects():
+    projects = Project.query.all()
+    projects = list(map(lambda project:project.serialize_whit_comentary(),projects))
+    return jsonify(projects), 200
+
+
+
+@app.route("/api/user/<int:user_id>/projects", methods=['GET', 'POST'])
+@app.route("/api/user/<int:user_id>/projects/<int:project_id>", methods=['GET', 'PUT', 'DELETE'])
+def contacts_by_user(user_id, project_id = None):
+    if request.method == 'GET':
+        if project_id is not None:
+            project = Project.query.filter_by(user_id=user_id, id=project_id).first()
+            if not project: return jsonify({"msg": "Project no encontrado"}), 404
+            return jsonify(project.serialize_whit_comentary()), 200
+        else:
+            projects = Project.query.filter_by(user_id=user_id)
+            projects = list(map(lambda project: project.serialize(), projects))
+            return jsonify(projects), 200
+
+    if request.method == 'POST':
+
         project_name = request.json.get("project_name")
         description = request.json.get("description")
         project_image = request.json.get("project_image")
@@ -100,11 +120,30 @@ def create_project():
         project.save()
         return jsonify({"mensaje":"El project fue creado con exito"})
 
-@app.route('/api/projects/all', methods=['GET'])
-def all_projects():
-    projects = Project.query.all()
-    projects = list(map(lambda project:project.serialize_whit_comentary(),projects))
-    return jsonify(projects), 200
+    if request.method == 'PUT':
+        project_name = request.json.get("project_name")
+        description = request.json.get("description")
+        project_image = request.json.get("project_image")
+
+
+        project = Project.query.filter_by(user_id=user_id, id=project_id).first()
+        if not project: return jsonify({"msg": "Contact not found!"}), 404
+
+        project.project_name = project_name
+        project.description = description
+        project.project_image = project_image
+        project.update()
+        
+
+        return jsonify(project.serialize()), 200
+    
+    if request.method == 'DELETE':
+        project = Project.query.filter_by(user_id=user_id, id=project_id).first()
+        project.delete()
+
+        return jsonify({"msg":"El proyecto fue eliminado con exito"})
+
+
 
 
 @app.route('/api/comentaries/create', methods=['GET','POST'])
@@ -120,8 +159,6 @@ def create_comentaries():
         comentaries = Comentary.query.all()
         comentaries = list(map(lambda comment:comment.serialize(),comentaries))
         return jsonify(comentaries), 200
-
-    
 
 if __name__== '__main__':
     app.run()

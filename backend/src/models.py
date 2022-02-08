@@ -111,7 +111,6 @@ class Project(db.Model):
     category = db.relationship("Category", backref="project", uselist=False)
     
     
-
     def serialize(self):
         return {
         "id": self.id,
