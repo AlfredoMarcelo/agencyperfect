@@ -1,4 +1,3 @@
-
 from flask import Flask, jsonify, render_template,request
 from flask_migrate import Migrate
 from flask_cors import CORS
@@ -72,11 +71,18 @@ def update_user(id):
 
     return jsonify(user.serialize()), 200
 
+@app.route('/api/delete/<int:id>', methods=['DELETE'])
+def delete_user(id):
+    user = User.query.get(id)
+    user.delete()
+    
+    return jsonify({"msg":"El usuario ha sido eliminado satisfactoriamente"})
+
 
 @app.route('/api/users_all', methods=['GET'])
 def all_users():
     users = User.query.all()
-    users = list(map(lambda user:user.serialize(),users))
+    users = list(map(lambda user:user.serialize_whit_project(),users))
     return jsonify(users),200
 
 
@@ -97,7 +103,7 @@ def create_project():
 @app.route('/api/projects/all', methods=['GET'])
 def all_projects():
     projects = Project.query.all()
-    projects = list(map(lambda project:project.serialize(),projects))
+    projects = list(map(lambda project:project.serialize_whit_comentary(),projects))
     return jsonify(projects), 200
 
 

@@ -43,6 +43,23 @@ class User(db.Model):
             "password": self.password,
             "image": self.image
         }
+
+    def serialize_whit_project(self):
+        return{
+            "id": self.id,
+            "name": self.name,
+            "lastname": self.lastname,
+            "email": self.email,
+            "password": self.password,
+            "image": self.image,
+            "projects": self.get_projects()
+
+        }
+    
+    def get_projects(self):
+        return list(map(lambda project:project.serialize(), self.projects))
+
+
     def save(self):
         db.session.add(self)
         db.session.commit()
@@ -90,7 +107,7 @@ class Project(db.Model):
     created_at = db.Column(db.DateTime,default=datetime.datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id", ondelete="CASCADE"))
     category_id = db.Column(db.Integer,db.ForeignKey("categories.id", ondelete="CASCADE"))
-    comentaries = db.relationship("Comentary", backref="project", uselist=False)
+    comentaries = db.relationship("Comentary", backref="project")
     category = db.relationship("Category", backref="project", uselist=False)
     
     
@@ -114,9 +131,18 @@ class Project(db.Model):
             "project_image": self.project_image,
             "created_at": self.created_at,
             "category": self.category.serialize(),
-            "user":self.user.serialize(),
-            "comentaries": list(map(lambda comentarie: comentarie.serialize(), self.comentaries))
+            "user":{
+                "name":self.user.name,
+                "lastname": self.user.lastname,
+                "image": self.user.image,
+                "email": self.user.email
+            },
+            "comentaries": self.get_comentaries()
         }
+
+    def get_comentaries(self):
+        return list(map(lambda comentary:comentary.serialize(),self.comentaries))
+
 
     def save(self):
         db.session.add(self)
