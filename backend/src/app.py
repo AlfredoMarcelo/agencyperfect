@@ -2,7 +2,6 @@ from flask import Flask, jsonify, render_template,request
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, jwt_required
-from itsdangerous import json
 from models import db,User,Project,Rol,RolUser,Comentary
 
 app = Flask(__name__)

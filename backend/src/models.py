@@ -3,21 +3,6 @@ import datetime
 
 db=SQLAlchemy()
 
-class RolUser(db.Model):
-    __tablename__="rols_users"
-    role_id = db.Column(db.Integer,db.ForeignKey("rols.id", ondelete="CASCADE"),primary_key=True)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id", ondelete="CASCADE"),primary_key=True)
-
-    def save(self):
-        db.session(self)
-        db.session.commit()
-
-    def update(self):
-        db.session.commit()
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
 
 class User(db.Model):
     __tablename__="users"
@@ -31,7 +16,7 @@ class User(db.Model):
     rol_id = db.Column(db.Integer,db.ForeignKey("rols.id"))
     comentary_id = db.Column(db.Integer,db.ForeignKey("comentaries.id"))
     projects = db.relationship('Project', cascade="all, delete", backref="user")
-    rols = db.relationship("Rol", cascade="all,delete", secondary="rols_users")
+    rols = db.relationship("Rol", cascade="all, delete", secondary="rols_users")
 
 
     def serialize(self):
@@ -52,13 +37,16 @@ class User(db.Model):
             "email": self.email,
             "password": self.password,
             "image": self.image,
-            "projects": self.get_projects()
+            "projects": self.get_projects(),
+            "rols": self.get_rols()
 
         }
     
     def get_projects(self):
         return list(map(lambda project:project.serialize(), self.projects))
 
+    def get_rols(self):
+        return list(map(lambda rol:rol.serialize(), self.rols))
 
     def save(self):
         db.session.add(self)
@@ -71,13 +59,36 @@ class User(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+class RolUser(db.Model):
+    __tablename__="rols_users"
+    role_id = db.Column(db.Integer,db.ForeignKey("rols.id", ondelete="CASCADE"),primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id", ondelete="CASCADE"),primary_key=True)
+
+    def save(self):
+        db.session(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+
 class Rol(db.Model):
     __tablename__="rols"
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(100),nullable=False, unique=True)
-    users = db.relationship("User", cascade="all, delete",secondary="rols_users")
+    users = db.relationship("User", cascade="all, delete", secondary="rols_users")
 
     def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name
+        }
+    
+    def serialize_whit_users(self):
         return {
             "id": self.id,
             "name": self.name,
@@ -85,7 +96,7 @@ class Rol(db.Model):
         }
 
     def get_users(self):
-        return list(map(lambda user: user.serialize(), self.users))
+        return list(map(lambda user: {"id": user.id, "name": user.name}, self.users))
 
     def save(self):
         db.session.add(self)
