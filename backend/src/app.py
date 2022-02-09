@@ -4,6 +4,7 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, jwt_required
 from models import db,User,Project,Rol,RolUser,Comentary
 from werkzeug.security import generate_password_hash, check_password_hash
+import datetime
 
 app = Flask(__name__)
 
@@ -58,7 +59,9 @@ def login():
         if not user: return jsonify({"msg":"El usuario o contraseña no estan registrado"}), 400
         if not check_password_hash(user.password,password): return jsonify({"msg":"El usuario o contraseña no se encuentran en los registros"}),400
 
-        access_token = create_access_token(identity=user.email)
+        expire = datetime.timedelta(minutes=20)
+
+        access_token = create_access_token(identity=user.email, expires=expire)
 
         data = {
             "access_token": access_token,
@@ -66,10 +69,6 @@ def login():
         }
 
         return jsonify(data),200
-
-
-
-
 
 @app.route('/api/update/<int:id>', methods=['PUT'])
 def update_user(id):
@@ -116,8 +115,6 @@ def all_projects():
     projects = Project.query.all()
     projects = list(map(lambda project:project.serialize_whit_comentary(),projects))
     return jsonify(projects), 200
-
-
 
 @app.route("/api/user/<int:user_id>/projects", methods=['GET', 'POST'])
 @app.route("/api/user/<int:user_id>/projects/<int:project_id>", methods=['GET', 'PUT', 'DELETE'])
@@ -167,9 +164,6 @@ def contacts_by_user(user_id, project_id = None):
         project.delete()
 
         return jsonify({"msg":"El proyecto fue eliminado con exito"})
-
-
-
 
 @app.route('/api/comentaries/create', methods=['GET','POST'])
 def create_comentaries():
