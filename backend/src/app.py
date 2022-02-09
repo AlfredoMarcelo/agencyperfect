@@ -3,6 +3,7 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, jwt_required
 from models import db,User,Project,Rol,RolUser,Comentary
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
@@ -14,6 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['JWT_SECRET_KEY'] = '5c2bf15004e661d7b7c9394617143d07'
 db.init_app(app)
 Migrate(app, db)
+jwt = JWTManager(app)
 CORS(app)
 
 @app.route('/')
@@ -38,7 +40,7 @@ def register():
         user.name = name
         user.lastname = lastname
         user.email = email
-        user.password = password
+        user.password = generate_password_hash(password)
         user.image = image
         user.save()
         return jsonify({"mensaje":"Se ha completado el registro con exito"}),200
@@ -51,6 +53,23 @@ def login():
 
         if not email: return jsonify({"email": "El email es requerido"}), 422
         if not password: return jsonify({"password": "El password es requerido"}), 422
+
+        user = User.query.filter_by(email=email).first()
+        if not user: return jsonify({"msg":"El usuario o contraseña no estan registrado"}), 400
+        if not check_password_hash(user.password,password): return jsonify({"msg":"El usuario o contraseña no se encuentran en los registros"}),400
+
+        access_token = create_access_token(identity=user.email)
+
+        data = {
+            "access_token": access_token,
+            "user": user.serialize()
+        }
+
+        return jsonify(data),200
+
+
+
+
 
 @app.route('/api/update/<int:id>', methods=['PUT'])
 def update_user(id):
