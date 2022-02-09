@@ -98,11 +98,18 @@ def delete_user(id):
 
 
 @app.route('/api/users_all', methods=['GET'])
+@jwt_required()
 def all_users():
     users = User.query.all()
-    users = list(map(lambda user:user.serialize_whit_project(),users))
+    users = list(map(lambda user:user.serialize(),users))
     return jsonify(users),200
 
+@app.route("/api/projects", methods=["GET"])#ruta creada de prueba*******
+@jwt_required()
+def projects():
+    identity = get_jwt_identity()
+    user = User.query.filter_by(email=identity).first()
+    return jsonify({"identity": identity, "user": user.serialize_whit_project()}),200
 
 @app.route('/api/projects/all', methods=['GET'])
 def all_projects():
