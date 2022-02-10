@@ -4,9 +4,10 @@ const Navbar = (props) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div className="container justify-content-around">
-        <a className="navbar-brand mb-0 h1" href="#">
+        <Link className="navbar-brand mb-0 h1" to="/">
+        <i className="bi bi-building me-2"></i>
           AgencyPerfect
-        </a>
+        </Link>
         <button
           className="navbar-toggler mt-3"
           type="button"
@@ -26,13 +27,13 @@ const Navbar = (props) => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contact">
-                Contact
+              <Link className="nav-link" to="/portfolio">
+                Portfolio
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/portfolio">
-                Portfolio
+              <Link className="nav-link" to="/contact">
+                Contact
               </Link>
             </li>
             <li className="nav-item">

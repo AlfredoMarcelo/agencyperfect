@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Navbar from "./components/navbar";
-import Carousel from "./components/carrusel";
+import Footer from "./components/footer";
 import {Home} from "./views/home";
 import {Login} from "./views/login";
 import {Profile} from "./views/profile";
@@ -12,7 +12,6 @@ const Layout = () => {
   return (
     <BrowserRouter>
       <Navbar />
-      <Carousel/>
       <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/login" component={Login}/>
@@ -21,6 +20,7 @@ const Layout = () => {
           <Route exact path="/contact" component={Contact}/>
           <Route component={NotFound}/>
       </Switch>
+      <Footer/>
     </BrowserRouter>
   );
 };
