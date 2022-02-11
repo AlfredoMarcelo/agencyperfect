@@ -37,11 +37,13 @@ export const Contact = (props) => {
               </button>
             </div>
             <div className="col-12 col-lg-8">
-              <img src="./img/project-01.jpg" alt="" className="img-fluid" />
+              <img src="./img/project-01.jpg" alt="" className="img-fluid rounded" />
             </div>
           </div>
-          <div className="row my-5">
+          {/* Este será un componente para los comentarios */}
+          <div className="row my-5 py-2">
             <div className="col-12 col-lg-8 mx-auto">
+                <p className="h5"><i className="bi bi-person-bounding-box h4 me-4"></i>Alfredo supanta <i className="bi bi-calendar-week h4 mx-4"></i>15/05/2022</p>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
                 suscipit dui ac nisi aliquam lacinia. Vivamus in scelerisque
@@ -52,6 +54,20 @@ export const Contact = (props) => {
               </p>
             </div>
           </div>
+          <div className="row my-5 py-2">
+            <div className="col-12 col-lg-8 mx-auto">
+                <p className="h5"><i className="bi bi-person-bounding-box h4 me-4"></i>Alfredo supanta <i className="bi bi-calendar-week h4 mx-4"></i>15/05/2022</p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                suscipit dui ac nisi aliquam lacinia. Vivamus in scelerisque
+                quam, non accumsan lorem. Interdum et malesuada fames ac ante
+                ipsum primis in faucibus. Nulla facilisi. Sed id laoreet magna.
+                Etiam posuere velit quis sapien semper dictum. Pellentesque ac
+                augue mollis, vestibulum.
+              </p>
+            </div>
+          </div>
+          {/* Este es un formulario para agregar comentarios */}
           <div className="row my-5">
             <div className="col-12 col-lg-8 mx-auto">
               <form>

@@ -24,7 +24,7 @@ export const Portfolio = (props) => {
             <p className="h1">Portfolio</p>
           </div>
           <div className="row text-dark text-center">
-              <div className="col-12 col-md-4 mb-5">
+              <div className="col-12 col-md-6 col-lg-4 mb-5">
                 <div className="card">
                     <div className="card-body">
                         <h2 className="my-5">$100</h2>
@@ -40,7 +40,7 @@ export const Portfolio = (props) => {
                     </div>
                 </div>  
               </div>
-              <div className="col-12 col-md-4 mb-5">
+              <div className="col-12 col-md-6 col-lg-4 mb-5">
                 <div className="card">
                     <div className="card-body">
                         <h2 className="my-5">$100</h2>
@@ -56,7 +56,7 @@ export const Portfolio = (props) => {
                     </div>
                 </div>  
               </div>
-              <div className="col-12 col-md-4 mb-5">
+              <div className="col-12 col-md-6 col-lg-4 mb-5">
                 <div className="card">
                     <div className="card-body">
                         <h2 className="my-5">$100</h2>
@@ -72,7 +72,7 @@ export const Portfolio = (props) => {
                     </div>
                 </div>  
               </div>
-              <div className="col-12 col-md-4 mb-5">
+              <div className="col-12 col-md-6 col-lg-4 mb-5">
                 <div className="card">
                     <div className="card-body">
                         <h2 className="my-5">$100</h2>
@@ -88,7 +88,7 @@ export const Portfolio = (props) => {
                     </div>
                 </div>  
               </div>
-              <div className="col-12 col-md-4 mb-5">
+              <div className="col-12 col-md-6 col-lg-4 mb-5">
                 <div className="card">
                     <div className="card-body">
                         <h2 className="my-5">$100</h2>
@@ -104,7 +104,7 @@ export const Portfolio = (props) => {
                     </div>
                 </div>  
               </div>
-              <div className="col-12 col-md-4 mb-5">
+              <div className="col-12 col-md-4 col-lg-4 mb-5">
                 <div className="card">
                     <div className="card-body">
                         <h2 className="my-5">$100</h2>
@@ -121,17 +121,6 @@ export const Portfolio = (props) => {
                 </div>  
               </div>
           </div>
-          <div className="row mb-5"></div>
-          <div className="row mb-5"></div>
-          <div className="row mb-5"></div>
-          <div className="row mb-5"></div>
-          <div className="row mb-5"></div>
-          <div className="row mb-5"></div>
-          <div className="row mb-5"></div>
-          <div className="row mb-5"></div>
-          <div className="row mb-5"></div>
-          <div className="row mb-5"></div>
-          <div className="row mb-5"></div>
           <div className="row mb-5"></div>
         </div>
       </main>
