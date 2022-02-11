@@ -33,8 +33,8 @@ const Navbar = (props) => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className={"nav-link active" + (location.pathname === '/contact' ? "active": "")} to="/contact">
-                Contact
+              <Link className={"nav-link active" + (location.pathname === '/project' ? "active": "")} to="/project">
+                Project
               </Link>
             </li>
             <li className="nav-item dropdown">

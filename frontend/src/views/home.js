@@ -46,27 +46,27 @@ export const Home = props => {
           <div className="carousel-item active">
             <img src="./img/01.jpg" className="d-block w-100" alt="..." />
             <div className="carousel-caption d-none d-md-block">
-              <h5>First slide label</h5>
+              <h2>Todos los portafolios en una sola página</h2>
               <p>
-                Some representative placeholder content for the first slide.
+                !Que esperas para unirte a esta gran comunidad
               </p>
             </div>
           </div>
           <div className="carousel-item">
             <img src="./img/02.jpg" className="d-block w-100" alt="..." />
             <div className="carousel-caption d-none d-md-block">
-              <h5>First slide label</h5>
+              <h2>Haz que tu portafolio sea único</h2>
               <p>
-                Some representative placeholder content for the first slide.
+                Demuestra tu potencial a los demas
               </p>
             </div>
           </div>
           <div className="carousel-item">
             <img src="./img/03.jpg" className="d-block w-100" alt="..." />
             <div className="carousel-caption d-none d-md-block">
-              <h5>First slide label</h5>
+              <h2>Aprovecha las oportunidades</h2>
               <p>
-                Some representative placeholder content for the first slide.
+                En esta comunidad aumentaras tus contactos y oportunidades laborales
               </p>
             </div>
           </div>

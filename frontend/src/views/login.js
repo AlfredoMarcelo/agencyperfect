@@ -15,11 +15,12 @@ export const Login = (props) => {
   }, []);
   return (
     <>
+      <section className="bg-dark">
       <div className="row mb-5"></div>
       <div className="row mb-5"></div>
+      <h1 className="mt-5 my-5 text-center text-light">Login</h1>
       <div className="row mb-5"></div>
-      <div className="row mb-5"></div>
-      <h1 className="mt-5 my-5">Login</h1>
+     
       {!!error && (
           
           <div className="alert alert-danger" role="alert">
@@ -48,13 +49,20 @@ export const Login = (props) => {
           value={password}
           onChange={handleChange}
         />
-        <button className="btn btn-info btn-block btn-sm">login</button>
+        <div className="d-grid gap-2">
+        <button className="btn btn-outline-warning">login</button>
+        </div>
       </form>
       <div className="row mb-5"></div>
       <div className="row mb-5"></div>
       <div className="row mb-5"></div>
       <div className="row mb-5"></div>
       <div className="row mb-5"></div>
+      <div className="row mb-5"></div>
+      <div className="row mb-5"></div>
+      <div className="row py-5"></div>
+     
+      </section>
     </>
   );
 };

@@ -59,13 +59,13 @@ def login():
         if not user: return jsonify({"msg":"El usuario o contraseña no estan registrado"}), 400
         if not check_password_hash(user.password,password): return jsonify({"msg":"El usuario o contraseña no se encuentran en los registros"}),400
 
-        expire = datetime.timedelta(minutes=20)
+        expire = datetime.timedelta(days=5)
 
-        access_token = create_access_token(identity=user.email, expires=expire)
+        access_token = create_access_token(identity=user.email, expires_delta=expire)
 
         data = {
             "access_token": access_token,
-            "user": user.serialize()
+            "user": user.serialize_whit_project()
         }
 
         return jsonify(data),200

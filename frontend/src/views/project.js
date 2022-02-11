@@ -1,9 +1,9 @@
-export const Contact = (props) => {
+export const Project = (props) => {
   return (
     <>
       <main className="bg-dark text-white">
         <div className="container  mt-5 py-5">
-          <div className="row text-center ">
+          {/* <div className="row text-center ">
             <div className="col-1 border">1</div>
             <div className="col-1 border">1</div>
             <div className="col-1 border">1</div>
@@ -16,7 +16,7 @@ export const Contact = (props) => {
             <div className="col-1 border">1</div>
             <div className="col-1 border">1</div>
             <div className="col-1 border">1</div>
-          </div>
+          </div> */}
           <div className="row text-center">
             <p className="h1">Project : Educación</p>
           </div>

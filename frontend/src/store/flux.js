@@ -7,12 +7,13 @@ const getState = ({ getStore, getActions, setStore }) => {
       error: null,
       isAuth: false,
       currentUser: null,
+      profile: null
     },
     actions: {
       isAuthenthicated: () => {
         if (sessionStorage.getItem("isAuth")) {
           setStore({
-            isAuth: sessionStorage.getItem("isAuth"),
+            isAuth: JSON.parse(sessionStorage.getItem("isAuth")),
             currentUser: JSON.parse(sessionStorage.getItem("currentUser")),
           });
         }
@@ -49,9 +50,11 @@ const getState = ({ getStore, getActions, setStore }) => {
               currentUser: infoUser,
               isAuth: true,
             });
+            
             sessionStorage.setItem("isAuth", true);
             sessionStorage.setItem("currentUser", JSON.stringify(infoUser));
             history.push("/");
+            console.log(infoUser)
           }
         } catch (error) {
           setStore({
@@ -59,6 +62,25 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
         }
       },
+      getProfile: () => {
+        const {apiURL, currentUser} = getStore();
+    
+        fetch(`${apiURL}/api/profile`, {
+          method:'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer' + currentUser?.access_token
+          }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+          console.log(data)
+          setStore({
+            profile:data
+          })
+        })
+        .catch(error => console.log(error));
+      }
     },
   };
 };

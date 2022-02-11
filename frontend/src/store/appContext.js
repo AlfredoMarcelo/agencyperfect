@@ -16,6 +16,7 @@ const injectContext = PassedComponent =>{
         }))
 
         useEffect(()=>{
+            console.log("Cargando información..."); //lo imprimira cada vez que recargue la pagina
 
             state.actions.isAuthenthicated()
 

@@ -37,8 +37,7 @@ class User(db.Model):
             "email": self.email,
             "password": self.password,
             "image": self.image,
-            "projects": self.get_projects(),
-            "rols": self.get_rols()
+            "projects": self.get_projects()
 
         }
     
