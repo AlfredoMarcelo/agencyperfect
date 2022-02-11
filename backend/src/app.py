@@ -52,8 +52,8 @@ def login():
         email = request.json.get("email")
         password = request.json.get("password")
 
-        if not email: return jsonify({"email": "El email es requerido"}), 422
-        if not password: return jsonify({"password": "El password es requerido"}), 422
+        if not email: return jsonify({"msg": "El email es requerido"}), 400
+        if not password: return jsonify({"msg": "El password es requerido"}), 400
 
         user = User.query.filter_by(email=email).first()
         if not user: return jsonify({"msg":"El usuario o contraseña no estan registrado"}), 400

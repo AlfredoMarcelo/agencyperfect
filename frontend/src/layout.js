@@ -6,7 +6,9 @@ import {Login} from "./views/login";
 import {Profile} from "./views/profile";
 import {Portfolio} from "./views/portfolio";
 import {Contact} from "./views/contact";
+import {Register} from "./views/register";
 import {NotFound} from "./views/notfound";
+import injectContext from "./store/appContext";
 
 const Layout = () => {
   return (
@@ -18,10 +20,11 @@ const Layout = () => {
           <Route exact path="/profile" component={Profile}/>
           <Route exact path="/portfolio" component={Portfolio}/>
           <Route exact path="/contact" component={Contact}/>
+          <Route exact path="/register" component={Register}/>
           <Route component={NotFound}/>
       </Switch>
       <Footer/>
     </BrowserRouter>
   );
 };
-export default Layout;
+export default injectContext(Layout);

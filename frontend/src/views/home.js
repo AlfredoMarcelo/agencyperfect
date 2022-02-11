@@ -1,6 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
-export const Home = (props) => {
+import { useContext, useEffect } from "react";
+import { Context } from "../store/appContext";
+import { Link, useHistory } from "react-router-dom";
+
+
+
+export const Home = props => {
+  const {store,actions} = useContext(Context);
+  const history = useHistory();
+  useEffect(() => {
+    if (!store.isAuth) history.push('/login')
+  },[] )
+
+
   return (
     <>
     <section id="inicio">

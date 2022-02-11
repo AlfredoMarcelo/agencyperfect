@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = (props) => {
+  const location = useLocation()
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div className="container justify-content-around">
@@ -22,22 +23,19 @@ const Navbar = (props) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to="/">
+              <Link className={"nav-link active" + (location.pathname === '/' ? "active": "")} aria-current="page" to="/">
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/portfolio">
+              <Link className={"nav-link active" + (location.pathname === '/portfolio' ? "active": "")}to="/portfolio">
                 Portfolio
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contact">
+              <Link className={"nav-link active" + (location.pathname === '/contact' ? "active": "")} to="/contact">
                 Contact
               </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="#"></Link>
             </li>
             <li className="nav-item dropdown">
               <Link
@@ -52,13 +50,18 @@ const Navbar = (props) => {
               </Link>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <Link className="dropdown-item" to="#">
+                  <Link className={"dropdown-item" + (location.pathname === '/login' ? "active": "")} to="/login">
                     Inicia sesión
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="#">
+                  <Link className={"dropdown-item" + (location.pathname === '/register' ? "active": "")} to="/register">
                     Registrate
+                  </Link>
+                </li>
+                <li>
+                  <Link className={"dropdown-item" + (location.pathname === '/profile' ? "active": "")} to="/profile">
+                    Profile
                   </Link>
                 </li>
               </ul>
