@@ -16,7 +16,7 @@ export const Register = (props) => {
     setState({...datos});
   }
 
-  const handleSubmit = e => {
+  const handleSub = e => {
     e.preventDefault();
     let formData = new FormData();
     formData.append("name",state.name);
@@ -30,8 +30,12 @@ export const Register = (props) => {
   
   const saveUser = form => {
     fetch('http://localhost:5000/api/register',{
-      method : 'POST',
-      body: JSON.stringify(form)
+      method : "POST",
+      body: JSON.stringify(form),
+      headers:{
+        'Content-Type':'application/json',
+        'Accept': 'application/json'
+      },
     })
       .then(resp => resp.json())
       .then(data => console.log(data))
@@ -49,7 +53,7 @@ export const Register = (props) => {
             </div>
             <div className="col-6 mt-5">
 {/* -------------------------------FORMULARIO------------------------------- */}
-              <form onSubmit={handleSubmit} className="border border-warning p-3 rounded needs-validation">
+              <form onSubmit={handleSub} className="border border-warning p-3 rounded needs-validation">
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label">
                     Name :
@@ -129,7 +133,7 @@ export const Register = (props) => {
             </div>
           </div>
           <div className="col-12 py-5">
-              <p className="h4 text-light">{state.name} - {state.lastname} - {state.email} - {state.password} - {state.photo}</p>
+              {/* <p className="h4 text-light">{state.name} - {state.lastname} - {state.email} - {state.password} - {state.photo}</p> */}
 
           </div>
         </div>

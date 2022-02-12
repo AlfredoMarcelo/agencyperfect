@@ -53,7 +53,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             
             sessionStorage.setItem("isAuth", true);
             sessionStorage.setItem("currentUser", JSON.stringify(infoUser));
-            history.push("/");
+            history.push("/project");
             console.log(infoUser)
           }
         } catch (error) {

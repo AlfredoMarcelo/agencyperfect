@@ -1,9 +1,16 @@
-import React from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { useHistory } from "react-router-dom";
+
 
 /* import { Link } from "react-router-dom"; */
 
 export const Profile = (props) => {
+  const {store,actions} = useContext(Context);
+  const history = useHistory();
+  useEffect(() => {
+    if (!store.isAuth) history.push('/login')
+  },[] )
   return (
     <>
       <main className="bg-dark text-white mt-5 py-5">

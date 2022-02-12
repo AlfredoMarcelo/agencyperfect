@@ -1,4 +1,13 @@
+import { useContext, useEffect } from "react";
+import { Context } from "../store/appContext";
+import { Link, useHistory } from "react-router-dom";
+
 export const Project = (props) => {
+  const {store,actions} = useContext(Context);
+  const history = useHistory();
+  useEffect(() => {
+    if (!store.isAuth) history.push('/login')
+  },[] )
   return (
     <>
       <main className="bg-dark text-white">

@@ -5,11 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 
 
 export const Home = props => {
-  const {store,actions} = useContext(Context);
-  const history = useHistory();
-  useEffect(() => {
-    if (!store.isAuth) history.push('/login')
-  },[] )
+  
 
 
   return (
