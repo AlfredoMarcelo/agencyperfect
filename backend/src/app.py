@@ -113,7 +113,7 @@ def projects():
 @app.route('/api/projects/all', methods=['GET'])
 def all_projects():
     projects = Project.query.all()
-    projects = list(map(lambda project:project.serialize_whit_comentary(),projects))
+    projects = list(map(lambda project:project.serialize(),projects))
     return jsonify(projects), 200
 
 @app.route("/api/user/<int:user_id>/projects", methods=['GET', 'POST'])

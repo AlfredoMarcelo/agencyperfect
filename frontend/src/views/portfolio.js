@@ -25,6 +25,7 @@ export const Portfolio = (props) => {
           <div className="row py-2"></div>
           <div className="row text-center">
             <p className="h1">Portfolio</p>
+            <i className="bi bi-archive h1"></i>
           </div>
           <Context.Consumer>
             {({ store, actions }) => {
@@ -34,8 +35,10 @@ export const Portfolio = (props) => {
                     <div className="col-12 col-md-6 col-lg-4 mb-5">
                       <div className="card">
                         <div className="card-body">
-                        <img src="https://i.picsum.photos/id/46/500/450.jpg?hmac=PeRBYWuxzhs7nNrZ_pvrzEe-jGsTWKHZh5GHF09yQOw
-" className="img-fluid"></img>
+                          <img
+                            src="https://i.picsum.photos/id/46/500/450.jpg?hmac=PeRBYWuxzhs7nNrZ_pvrzEe-jGsTWKHZh5GHF09yQOw"
+                            className="img-fluid"
+                          ></img>
                         </div>
                         <ul className="list-group list-group-flush">
                           <li className="list-group-item">Name User:</li>
@@ -43,7 +46,8 @@ export const Portfolio = (props) => {
                         </ul>
                         <div className="card-body">
                           <button className="btn btn-outline-dark">
-                            Ver proyecto
+                          <i class="bi bi-folder2-open"></i>  Ver proyecto
+                             
                           </button>
                         </div>
                       </div>
@@ -51,8 +55,10 @@ export const Portfolio = (props) => {
                     <div className="col-12 col-md-6 col-lg-4 mb-5">
                       <div className="card">
                         <div className="card-body">
-                        <img src="https://i.picsum.photos/id/46/500/450.jpg?hmac=PeRBYWuxzhs7nNrZ_pvrzEe-jGsTWKHZh5GHF09yQOw
-" className="img-fluid"></img>
+                          <img
+                            src="https://i.picsum.photos/id/46/500/450.jpg?hmac=PeRBYWuxzhs7nNrZ_pvrzEe-jGsTWKHZh5GHF09yQOw"
+                            className="img-fluid"
+                          ></img>
                         </div>
                         <ul className="list-group list-group-flush">
                           <li className="list-group-item">Name User:</li>
@@ -60,7 +66,7 @@ export const Portfolio = (props) => {
                         </ul>
                         <div className="card-body">
                           <button className="btn btn-outline-dark">
-                            Ver proyecto
+                          <i class="bi bi-folder2-open"></i>  Ver proyecto
                           </button>
                         </div>
                       </div>
@@ -68,8 +74,10 @@ export const Portfolio = (props) => {
                     <div className="col-12 col-md-6 col-lg-4 mb-5">
                       <div className="card">
                         <div className="card-body">
-                        <img src="https://i.picsum.photos/id/46/500/450.jpg?hmac=PeRBYWuxzhs7nNrZ_pvrzEe-jGsTWKHZh5GHF09yQOw
-" className="img-fluid"></img>
+                          <img
+                            src="https://i.picsum.photos/id/46/500/450.jpg?hmac=PeRBYWuxzhs7nNrZ_pvrzEe-jGsTWKHZh5GHF09yQOw"
+                            className="img-fluid"
+                          ></img>
                         </div>
                         <ul className="list-group list-group-flush">
                           <li className="list-group-item">Name User:</li>
@@ -77,7 +85,7 @@ export const Portfolio = (props) => {
                         </ul>
                         <div className="card-body">
                           <button className="btn btn-outline-dark">
-                            Ver proyecto
+                          <i class="bi bi-folder2-open"></i>  Ver proyecto
                           </button>
                         </div>
                       </div>
@@ -85,8 +93,10 @@ export const Portfolio = (props) => {
                     <div className="col-12 col-md-6 col-lg-4 mb-5">
                       <div className="card">
                         <div className="card-body">
-                        <img src="https://i.picsum.photos/id/46/500/450.jpg?hmac=PeRBYWuxzhs7nNrZ_pvrzEe-jGsTWKHZh5GHF09yQOw
-" className="img-fluid"></img>
+                          <img
+                            src="https://i.picsum.photos/id/46/500/450.jpg?hmac=PeRBYWuxzhs7nNrZ_pvrzEe-jGsTWKHZh5GHF09yQOw"
+                            className="img-fluid"
+                          ></img>
                         </div>
                         <ul className="list-group list-group-flush">
                           <li className="list-group-item">Name User:</li>
@@ -94,7 +104,7 @@ export const Portfolio = (props) => {
                         </ul>
                         <div className="card-body">
                           <button className="btn btn-outline-dark">
-                            Ver proyecto
+                          <i class="bi bi-folder2-open"></i>  Ver proyecto
                           </button>
                         </div>
                       </div>
@@ -102,16 +112,18 @@ export const Portfolio = (props) => {
                     <div className="col-12 col-md-6 col-lg-4 mb-5">
                       <div className="card">
                         <div className="card-body">
-                        <img src="https://i.picsum.photos/id/46/500/450.jpg?hmac=PeRBYWuxzhs7nNrZ_pvrzEe-jGsTWKHZh5GHF09yQOw
-" className="img-fluid"></img>
+                          <img
+                            src="https://i.picsum.photos/id/46/500/450.jpg?hmac=PeRBYWuxzhs7nNrZ_pvrzEe-jGsTWKHZh5GHF09yQOw"
+                            className="img-fluid"
+                          ></img>
                         </div>
                         <ul className="list-group list-group-flush">
                           <li className="list-group-item">Name User:</li>
                           <li className="list-group-item">Project Name: </li>
                         </ul>
                         <div className="card-body">
-                          <button className="btn btn-outline-dark">
-                            Ver proyecto
+                          <button className="btn btn-outline-dark" >
+                          <i class="bi bi-folder2-open"></i>  Ver proyecto
                           </button>
                         </div>
                       </div>
@@ -119,8 +131,10 @@ export const Portfolio = (props) => {
                     <div className="col-12 col-md-6 col-lg-4 mb-5">
                       <div className="card">
                         <div className="card-body">
-                        <img src="https://i.picsum.photos/id/46/500/450.jpg?hmac=PeRBYWuxzhs7nNrZ_pvrzEe-jGsTWKHZh5GHF09yQOw
-" className="img-fluid"></img>
+                          <img
+                            src="https://i.picsum.photos/id/46/500/450.jpg?hmac=PeRBYWuxzhs7nNrZ_pvrzEe-jGsTWKHZh5GHF09yQOw"
+                            className="img-fluid"
+                          ></img>
                         </div>
                         <ul className="list-group list-group-flush">
                           <li className="list-group-item">Name User:</li>
@@ -128,7 +142,7 @@ export const Portfolio = (props) => {
                         </ul>
                         <div className="card-body">
                           <button className="btn btn-outline-dark">
-                            Ver proyecto
+                          <i class="bi bi-folder2-open"></i>  Ver proyecto
                           </button>
                         </div>
                       </div>
@@ -157,8 +171,6 @@ export const Portfolio = (props) => {
                 </div>  
               </div>
             </div> */}
-            <div className="row py-5"></div>
-          <div className="row py-5"></div>
           <div className="row py-5"></div>
         </div>
       </main>

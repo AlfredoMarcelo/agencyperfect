@@ -25,7 +25,6 @@ class User(db.Model):
             "name": self.name,
             "lastname": self.lastname,
             "email": self.email,
-            "password": self.password,
             "image": self.image
         }
 
@@ -35,7 +34,6 @@ class User(db.Model):
             "name": self.name,
             "lastname": self.lastname,
             "email": self.email,
-            "password": self.password,
             "image": self.image,
             "projects": self.get_projects()
 
@@ -128,7 +126,6 @@ class Project(db.Model):
         "description": self.description,
         "project_image": self.project_image,
         "created_at": self.created_at,
-        "category": self.category.serialize(),
         "user": self.user.serialize()
         }
 
