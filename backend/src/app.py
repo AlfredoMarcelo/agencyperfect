@@ -1,8 +1,9 @@
+from email.policy import default
 from flask import Flask, jsonify, render_template,request
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, jwt_required
-from models import db,User,Project,Rol,RolUser,Comentary
+from models import db,User,Project,Role,Comentary
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 
@@ -32,7 +33,9 @@ def register():
         email = request.json.get("email")
         password = request.json.get("password")
         image = request.json.get("image","")
+        role_id = request.json.get("role_id", "2")
 
+        
         if not email: return jsonify({"msg":"Debe ingresar un email para registrarse"}), 400
         user = User.query.filter_by(email=email).first()
         if user: return jsonify({"msg":"El email ya está en uso"}),400
@@ -43,6 +46,7 @@ def register():
         user.email = email
         user.password = generate_password_hash(password)
         user.image = image
+        user.role_id = role_id
         user.save()
         return jsonify({"mensaje":"Se ha completado el registro con exito"}),200
 

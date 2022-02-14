@@ -1,3 +1,4 @@
+from sqlalchemy import insert
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 
@@ -13,11 +14,9 @@ class User(db.Model):
     password = db.Column(db.String(200),nullable=False)
     image = db.Column(db.String(5000))
     active = db.Column(db.Boolean, default=True)
-    rol_id = db.Column(db.Integer,db.ForeignKey("rols.id"))
-    comentary_id = db.Column(db.Integer,db.ForeignKey("comentaries.id"))
+    role_id = db.Column(db.Integer,db.ForeignKey("roles.id"))
     projects = db.relationship('Project', cascade="all, delete", backref="user")
-    rols = db.relationship("Rol", cascade="all, delete", secondary="rols_users")
-
+    
 
     def serialize(self):
         return{
@@ -25,7 +24,8 @@ class User(db.Model):
             "name": self.name,
             "lastname": self.lastname,
             "email": self.email,
-            "image": self.image
+            "image": self.image,
+            "role_id":self.role_id
         }
 
     def serialize_whit_project(self):
@@ -56,28 +56,14 @@ class User(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-class RolUser(db.Model):
-    __tablename__="rols_users"
-    role_id = db.Column(db.Integer,db.ForeignKey("rols.id", ondelete="CASCADE"),primary_key=True)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id", ondelete="CASCADE"),primary_key=True)
-
-    def save(self):
-        db.session(self)
-        db.session.commit()
-
-    def update(self):
-        db.session.commit()
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
-
-
-class Rol(db.Model):
-    __tablename__="rols"
+class Role(db.Model):
+    __tablename__="roles"
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(100),nullable=False, unique=True)
-    users = db.relationship("User", cascade="all, delete", secondary="rols_users")
+    users = db.relationship("User", cascade="all, delete", backref="role")
+
+
+
 
     def serialize(self):
         return {
@@ -105,6 +91,7 @@ class Rol(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+
 
 class Project(db.Model):
     __tablename__="projects"
