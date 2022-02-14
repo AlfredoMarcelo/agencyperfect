@@ -33,13 +33,13 @@ def register():
         email = request.json.get("email")
         password = request.json.get("password")
         image = request.json.get("image","")
-        role_id = request.json.get("role_id", "2")
+        role_id = request.json.get("role_id", 2)
 
         
         if not email: return jsonify({"msg":"Debe ingresar un email para registrarse"}), 400
         user = User.query.filter_by(email=email).first()
         if user: return jsonify({"msg":"El email ya está en uso"}),400
-
+        
         user = User()
         user.name = name
         user.lastname = lastname

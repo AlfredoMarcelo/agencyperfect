@@ -7,7 +7,6 @@ export const Register = (props) => {
     email: null,
     password: null,
     image:null
-
   })
 
   const handleChange = e => {
@@ -18,23 +17,23 @@ export const Register = (props) => {
 
   const handleSub = e => {
     e.preventDefault();
-    let formData = new FormData();
-    formData.append("name",state.name);
-    formData.append("lastname",state.lastname);
-    formData.append("email",state.email);
-    formData.append("password",state.password);
-    formData.append("image",state.image);
+    let formData = {
+    "name":state.name,
+    "lastname":state.lastname,
+    "email":state.email,
+    "password":state.password,
+    "image":state.image,
+    "role_id":state.role_id,
+    }
+    saveUser(formData)
+  } 
 
-    saveUser(FormData)
-  }
-  
   const saveUser = form => {
     fetch('http://localhost:5000/api/register',{
       method : "POST",
       body: JSON.stringify(form),
       headers:{
-        'Content-Type':'application/json',
-        'Accept': 'application/json'
+        'Content-Type':'application/json'
       },
     })
       .then(resp => resp.json())
