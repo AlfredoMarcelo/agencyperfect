@@ -9,11 +9,12 @@ import {Project} from "./views/project";
 import {Register} from "./views/register";
 import {NotFound} from "./views/notfound";
 import injectContext from "./store/appContext";
+import NavbarAdmin from "./components/NavbarAdmin";
 
 const Layout = () => {
   return (
     <BrowserRouter>
-      <Navbar />
+      <NavbarAdmin />
       <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/login" component={Login}/>
