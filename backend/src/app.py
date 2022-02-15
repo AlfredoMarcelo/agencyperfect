@@ -101,7 +101,7 @@ def delete_user(id):
 
 
 @app.route('/api/users_all', methods=['GET'])
-@jwt_required()
+
 def all_users():
     users = User.query.all()
     users = list(map(lambda user:user.serialize(),users))

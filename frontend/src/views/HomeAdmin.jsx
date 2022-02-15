@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import { Link, useHistory } from "react-router-dom";
 
 const HomeAdmin = () => {
   return (
-    <div>HomeAdmin</div>
-  )
-}
+    <main className="bg-dark">
+      <img src="./img/HomeAdmin.jpg" className="img-fluid" alt="..." />
+      <div className="container"></div>
+    </main>
+  );
+};
 
-export default HomeAdmin
+export default HomeAdmin;

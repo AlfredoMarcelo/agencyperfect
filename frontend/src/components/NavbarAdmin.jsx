@@ -5,7 +5,7 @@ const NavbarAdmin = () => {
 
     const location = useLocation();
     return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-warning fixed-top">
+    <nav className="navbar navbar-expand-lg navbar-light bg-warning fixed-top">
       <div className="container justify-content-around">
         <Link className="navbar-brand mb-0 h1" to="/">
         <i className="bi bi-building me-2"></i>
@@ -38,22 +38,24 @@ const NavbarAdmin = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="True"
               >
-                <i className="bi bi-person-workspace"></i>
+                <i className="bi bi-person-workspace h5"></i>
               </Link>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
+                  <Link className={"dropdown-item" + (location.pathname === '/boardPortfolio' ? "active": "")} to="/boardPortfolio">
+                    Board Portfolio
+                    <i className="bi bi-inboxes-fill ms-2"></i>
+                  </Link>
+                </li>
+                <li>
+                  <Link className={"dropdown-item" + (location.pathname === '/boardUser' ? "active": "")} to="/boardUser">
+                    Board User
+                    <i className="bi bi-people-fill ms-2"></i>
+                  </Link>
+                </li>
+                <li>
                   <Link className={"dropdown-item" + (location.pathname === '/login' ? "active": "")} to="/login">
-                    Inicia sesión
-                  </Link>
-                </li>
-                <li>
-                  <Link className={"dropdown-item" + (location.pathname === '/register' ? "active": "")} to="/register">
-                    Registrate
-                  </Link>
-                </li>
-                <li>
-                  <Link className={"dropdown-item" + (location.pathname === '/profile' ? "active": "")} to="/profile">
-                    Profile
+                    Cerrar Sesión
                   </Link>
                 </li>
               </ul>
