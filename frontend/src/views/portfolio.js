@@ -8,20 +8,6 @@ export const Portfolio = (props) => {
     <>
       <main className="bg-dark text-white mt-5 py-5">
         <div className="container">
-          {/* <div className="row text-center">
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-          </div> */}
           <div className="row py-2"></div>
           <div className="row text-center">
             <p className="h1">Portfolio</p>
