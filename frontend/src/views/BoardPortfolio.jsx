@@ -13,8 +13,13 @@ const BoardPortfolio = () => {
     console.log(cancion);
   };
 
-  const deleteProject=(id)=>{
-    console.log(id)
+  const deleteProject= async (id)=>{
+    const res = await fetch(`http://127.0.0.1:5000/api/delete_project/${id}`,{
+      method:"DELETE"
+    });
+    const data = await res.json();
+    console.log(data)
+    await fetchData()
   }
 
   return (

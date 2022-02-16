@@ -99,6 +99,14 @@ def delete_user(id):
     
     return jsonify({"msg":"El usuario ha sido eliminado satisfactoriamente"})
 
+@app.route('/api/delete_project/<int:id>', methods=['DELETE'])
+def delete_project(id):
+    project = Project.query.get(id)
+    
+    project.delete()
+    
+    return jsonify({"msg":"El proyecto ha sido eliminado satisfactoriamente"})
+
 
 @app.route('/api/users_all', methods=['GET'])
 
@@ -107,12 +115,10 @@ def all_users():
     users = list(map(lambda user:user.serialize(),users))
     return jsonify(users),200
 
-@app.route("/api/projects", methods=["GET"])#ruta creada de prueba*******
-@jwt_required()
-def projects():
-    identity = get_jwt_identity()
-    user = User.query.filter_by(email=identity).first()
-    return jsonify({"identity": identity, "user": user.serialize_whit_project()}),200
+@app.route("/api/user/<int:id>", methods=["GET"])#ruta creada de prueba*******
+def projects(id):
+    user = User.query.get(id)
+    return jsonify({"user": user.serialize()}),200
 
 @app.route('/api/projects/all', methods=['GET'])
 def all_projects():

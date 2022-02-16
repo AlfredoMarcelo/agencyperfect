@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 
 const BoardUser = () => {
+
+    const [name, setName] = useState("")
+    const [lastname, setLastame] = useState("")
+    const [email, setEmail] = useState("")
     
     let [lista, setLista] = useState([]);
     React.useEffect(() => {
@@ -20,6 +24,13 @@ const BoardUser = () => {
       const data = await res.json();
       console.log(data)
       await fetchData()
+    }
+
+    const editUser = async (id) =>{
+      const res = await fetch(`http://127.0.0.1:5000/api/user/${id}`)
+        const data = await res.json();
+        console.log(data)
+      
     }
     
     
@@ -50,11 +61,11 @@ const BoardUser = () => {
                     </li>
                   </ul>
                   <div className="card-body">
-                    <button className="btn btn-warning me-1">
-                      <i class="bi bi-folder2-open"></i> Editar
+                    <button className="btn btn-warning me-1" onClick={()=> editUser(item.id)}>
+                      <i class="bi bi-folder2-open"></i> Edit
                     </button>
                     <button className="btn btn-danger ms-1"onClick={()=> deleteUser(item.id)}>
-                      <i class="bi bi-folder2-open"></i> Eliminar
+                      <i class="bi bi-folder2-open"></i> Delete
                     </button>
                   </div>
                 </div>
