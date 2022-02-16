@@ -13,13 +13,17 @@ const BoardPortfolio = () => {
     console.log(cancion);
   };
 
+  const deleteProject=(id)=>{
+    console.log(id)
+  }
+
   return (
     <>
       <main className="bg-dark text-white mt-5 py-5">
         <div className="container">
           <div className="row py-2"></div>
           <div className="row text-center">
-            <p className="h1">Portfolio</p>
+            <p className="h1">Projects</p>
             <i className="bi bi-archive h1"></i>
           </div>
           <div className="row text-dark text-center pt-4">
@@ -31,7 +35,7 @@ const BoardPortfolio = () => {
                   </div>
                   <ul className="list-group list-group-flush">
                     <li className="list-group-item">
-                      Name User:{item.user.name}
+                      Name User: {item.user.name}
                     </li>
                     <li className="list-group-item">
                       Project Name: {item.project_name}{" "}
@@ -44,7 +48,7 @@ const BoardPortfolio = () => {
                     <button className="btn btn-warning me-1">
                       <i class="bi bi-folder2-open"></i> Editar
                     </button>
-                    <button className="btn btn-danger ms-1">
+                    <button className="btn btn-danger ms-1" onClick={()=> deleteProject(item.id)}>
                       <i class="bi bi-folder2-open"></i> Eliminar
                     </button>
                   </div>

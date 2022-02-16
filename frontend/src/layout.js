@@ -17,9 +17,9 @@ import BoardUser from "./views/BoardUser";
 const Layout = () => {
   return (
     <BrowserRouter>
-      {1>2?<Navbar/>:<NavbarAdmin />}
+      {3>2?<Navbar/>:<NavbarAdmin />}
       <Switch>
-          {1> 2?<Route exact path="/" component={Home}/>:
+          {3> 2?<Route exact path="/" component={Home}/>:
           <Route exact path="/" component={HomeAdmin}/>} 
           <Route exact path="/login" component={Login}/>
           <Route exact path="/profile" component={Profile}/>

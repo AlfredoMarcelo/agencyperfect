@@ -138,11 +138,13 @@ def contacts_by_user(user_id, project_id = None):
         project_name = request.json.get("project_name")
         description = request.json.get("description")
         project_image = request.json.get("project_image")
+        user_id = request.json.get("user_id")
 
         project = Project()
         project.project_name = project_name
         project.description = description
         project.project_image = project_image
+        project.user_id = user_id
         project.save()
         return jsonify({"mensaje":"El project fue creado con exito"})
 
@@ -173,9 +175,14 @@ def contacts_by_user(user_id, project_id = None):
 def create_comentaries():
     if request.method == "POST":
         comment = request.json.get("comment")
-        
+        user_id = request.json.get("user_id")
+        project_id = request.json.get("project_id")
+
+
         comentary = Comentary()
         comentary.comment = comment
+        comentary.user_id = user_id
+        comentary.project_id = project_id
         comentary.save()
         return jsonify(comentary.serialize()), 201
     if request.method == "GET":
