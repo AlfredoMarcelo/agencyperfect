@@ -17,7 +17,7 @@ const Navbar = (props) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div className="container justify-content-around">
-        <Link className="navbar-brand mb-0 h1" to="/">
+        <Link className="navbar-brand mb-0 h1 text-warning" to="/">
         <i className="bi bi-building me-2"></i>
           AgencyPerfect
         </Link>

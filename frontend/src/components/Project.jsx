@@ -19,26 +19,18 @@ export const Project = (props) => {
       <main className="bg-dark text-white">
         <div className="container  mt-5 py-5">
           <div className="row text-center">
-            <p className="h1">{store.singleProject.project_name}</p>
+            <p className="h2">{store.singleProject.project_name}</p>
           </div>
           <div className="row mt-5">
-            <div className="col-12 col-lg-4">
-              <h5>Project de Educación</h5>
+            <div className="col-12 col-md-6 col-lg-7">
+              <p className="h4">{store.singleProject.project_name}</p>
               <hr />
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                suscipit dui ac nisi aliquam lacinia. Vivamus in scelerisque
-                quam, non accumsan lorem. Interdum et malesuada fames ac ante
-                ipsum primis in faucibus. Nulla facilisi. Sed id laoreet magna.
-                Etiam posuere velit quis sapien semper dictum. Pellentesque ac
-                augue mollis, vestibulum.
+              {store.singleProject.description}
               </p>
-              <button className="btn btn-outline-light mb-5 mb-lg-0">
-                Contactar
-              </button>
             </div>
-            <div className="col-12 col-lg-8">
-              <img src="./img/project-01.jpg" alt="" className="img-fluid rounded" />
+            <div className="col-12 col-md-6 col-lg-5">
+              <img src={store.singleProject.project_image} alt="" className="img-fluid rounded" />
             </div>
           </div>
           {/* Este será un componente para los comentarios */}

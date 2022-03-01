@@ -127,9 +127,8 @@ def all_projects():
 
 @app.route('/api/projects/<int:project_id>', methods=['GET'])
 def get_project(project_id):
-    project = Project.query.filter_by(id=project_id)
-    project = list(map(lambda single:single.serialize(),project))
-    return jsonify(project), 200
+    project = Project.query.filter_by(id=project_id).first()
+    return jsonify(project.serialize()), 200
 
 @app.route("/api/user/<int:user_id>/projects", methods=['GET', 'POST'])
 @app.route("/api/user/<int:user_id>/projects/<int:project_id>", methods=['GET', 'PUT', 'DELETE'])

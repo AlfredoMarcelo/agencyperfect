@@ -108,13 +108,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           headers:{"Content-type":"application/json"},
         })
           .then((resp)=>resp.json())
-          .then((response)=>{/* console.log(response) */actions.setterList(response)})
+          .then((response)=>{console.log(response) 
+            setStore({singleProject : response})})
       },
-      setterList:(response)=>{
+      /* setterList:(response)=>{
         const store = getStore()
         setStore({singleProject:response})
-        console.log(store.singleProject)
-      }
+        console.log(store.singleProject)} */
+      
     },
   };
 };
