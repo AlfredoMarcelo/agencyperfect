@@ -1,31 +1,23 @@
 import { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { Link, useHistory } from "react-router-dom";
+import {useHistory } from "react-router-dom";
 
 export const Project = (props) => {
-  const {store,actions} = useContext(Context);
+    
+  const {store} = useContext(Context);
+
   const history = useHistory();
+
+
   useEffect(() => {
     if (!store.isAuth) history.push('/login')
   },[] )
+
+
   return (
     <>
       <main className="bg-dark text-white">
         <div className="container  mt-5 py-5">
-          {/* <div className="row text-center ">
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-            <div className="col-1 border">1</div>
-          </div> */}
           <div className="row text-center">
             <p className="h1">Project : Educación</p>
           </div>

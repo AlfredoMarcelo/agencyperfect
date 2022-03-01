@@ -12,6 +12,7 @@ export const Login = (props) => {
 
   useEffect(() => {
     if (store.isAuth) history.push("/");
+    console.log(store.email)
   }, []);
   return (
     <>
@@ -25,8 +26,8 @@ export const Login = (props) => {
             </div>
 
             {!!error && (
-              <div className="alert alert-danger" role="alert">
-                Error: {error}
+              <div className="alert alert-danger h5" role="alert">
+                <i class="bi bi-exclamation-circle-fill text-danger"></i> {error}
               </div>
             )}
             <div className="col-6 mt-5">
@@ -67,6 +68,7 @@ export const Login = (props) => {
             </div>
           </div>
         </div>
+        <div className="row py-5"></div>
         <div className="row py-5"></div>
         <div className="row py-5"></div>
         <div className="row py-5"></div>

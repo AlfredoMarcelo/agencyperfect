@@ -60,8 +60,8 @@ def login():
         if not password: return jsonify({"msg": "El password es requerido"}), 400
 
         user = User.query.filter_by(email=email).first()
-        if not user: return jsonify({"msg":"El usuario o contraseña no estan registrado"}), 400
-        if not check_password_hash(user.password,password): return jsonify({"msg":"El usuario o contraseña no se encuentran en los registros"}),400
+        if not user: return jsonify({"msg":"Contraseña incorrecta o el usuario no está registrado"}), 400
+        if not check_password_hash(user.password,password): return jsonify({"msg":"Contraseña incorrecta o el usuario no está registrado"}),400
 
         expire = datetime.timedelta(days=5)
 

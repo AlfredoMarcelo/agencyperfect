@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 
 const BoardUser = () => {
-
-    const [name, setName] = useState("")
-    const [lastname, setLastame] = useState("")
-    const [email, setEmail] = useState("")
     
     let [lista, setLista] = useState([]);
     React.useEffect(() => {
@@ -62,10 +58,10 @@ const BoardUser = () => {
                   </ul>
                   <div className="card-body">
                     <button className="btn btn-warning me-1" onClick={()=> editUser(item.id)}>
-                      <i class="bi bi-folder2-open"></i> Edit
+                      <i className="bi bi-folder2-open"></i> Edit
                     </button>
                     <button className="btn btn-danger ms-1"onClick={()=> deleteUser(item.id)}>
-                      <i class="bi bi-folder2-open"></i> Delete
+                      <i className="bi bi-folder2-open"></i> Delete
                     </button>
                   </div>
                 </div>

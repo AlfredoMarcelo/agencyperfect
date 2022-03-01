@@ -1,7 +1,19 @@
-import { Link, useLocation } from "react-router-dom";
+import { useContext} from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 const Navbar = (props) => {
   const location = useLocation()
+  const {store,actions}=useContext(Context)
+  /* const history = useHistory() */
+  
+
+
+  const cerrar=(/* history */)=>{
+    actions.cerrarSesion()
+  }
+
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div className="container justify-content-around">
@@ -23,18 +35,8 @@ const Navbar = (props) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className={"nav-link active" + (location.pathname === '/' ? "active": "")} aria-current="page" to="/">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link className={"nav-link active" + (location.pathname === '/portfolio' ? "active": "")}to="/portfolio">
                 Portfolio
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className={"nav-link active" + (location.pathname === '/project' ? "active": "")} to="/project">
-                Project
               </Link>
             </li>
             <li className="nav-item dropdown">
@@ -49,21 +51,33 @@ const Navbar = (props) => {
                 <i className="bi bi-person-lines-fill h5"></i>
               </Link>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                {store.isAuth?
+
+                <li onClick={()=>cerrar()}>
+                  <Link className={"dropdown-item" + (location.pathname === '/login' ? "active": "")} to="/" >
+                    Logout
+                  </Link>
+                </li>
+                :
+                <>
                 <li>
                   <Link className={"dropdown-item" + (location.pathname === '/login' ? "active": "")} to="/login">
-                    Inicia sesión
+                    Login
                   </Link>
                 </li>
                 <li>
                   <Link className={"dropdown-item" + (location.pathname === '/register' ? "active": "")} to="/register">
-                    Registrate
+                    Register
                   </Link>
                 </li>
+                </>
+                }
+                {store.isAuth &&
                 <li>
                   <Link className={"dropdown-item" + (location.pathname === '/profile' ? "active": "")} to="/profile">
                     Profile
                   </Link>
-                </li>
+                </li>}
               </ul>
             </li>
           </ul>

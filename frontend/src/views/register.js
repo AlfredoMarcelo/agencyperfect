@@ -2,11 +2,11 @@ import { useState } from "react";
 
 export const Register = (props) => {
   const [state, setState] = useState({
-    name: null,
-    lastname: null,
-    email: null,
-    password: null,
-    image:null
+    name: "",
+    lastname: "",
+    email: "",
+    password: "",
+    image:""
   })
 
   const handleChange = e => {
@@ -26,6 +26,7 @@ export const Register = (props) => {
     "role_id":state.role_id,
     }
     saveUser(formData)
+    
   } 
 
   const saveUser = form => {
@@ -38,6 +39,13 @@ export const Register = (props) => {
     })
       .then(resp => resp.json())
       .then(data => console.log(data))
+      setState({
+        name: "",
+        lastname: "",
+        email: "",
+        password: "",
+        image:""
+      })
   }
 
   return (
@@ -62,6 +70,7 @@ export const Register = (props) => {
                     className="form-control"
                     id="name"
                     name="name"
+                    value={state.name}
                     onChange={handleChange}
                   />
                 </div>
@@ -74,6 +83,7 @@ export const Register = (props) => {
                     className="form-control"
                     id="lastname"
                     name="lastname"
+                    value={state.lastname}
                     onChange={handleChange}
                   />
                 </div>
@@ -87,6 +97,7 @@ export const Register = (props) => {
                     aria-describedby="email"
                     id="email"
                     name="email"
+                    value={state.email}
                     onChange={handleChange}
                   />
                 </div>
@@ -100,6 +111,7 @@ export const Register = (props) => {
                     aria-describedby="password"
                     id="password"
                     name="password"
+                    value={state.password}
                     onChange={handleChange}
                   />
                 </div>
@@ -113,6 +125,7 @@ export const Register = (props) => {
                     aria-describedby="image"
                     id="image"
                     name="image"
+                    value={state.image}
                     onChange={handleChange}
                   />
                 </div>

@@ -1,17 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext} from "react";
+import { Context } from "../store/appContext";
 
 const BoardPortfolio = () => {
-  let [lista, setLista] = useState([]);
+  
+  const {store,actions}=useContext(Context)
+
   React.useEffect(() => {
-    fetchData();
+    actions.getProjects();
   }, []);
 
-  const fetchData = async () => {
-    const data = await fetch("http://127.0.0.1:5000/api/projects/all");
-    const cancion = await data.json();
-    setLista(cancion);
-    console.log(cancion);
-  };
 
   const deleteProject= async (id)=>{
     const res = await fetch(`http://127.0.0.1:5000/api/delete_project/${id}`,{
@@ -19,7 +16,7 @@ const BoardPortfolio = () => {
     });
     const data = await res.json();
     console.log(data)
-    await fetchData()
+    actions.getProjects()
   }
 
   return (
@@ -32,7 +29,7 @@ const BoardPortfolio = () => {
             <i className="bi bi-archive h1"></i>
           </div>
           <div className="row text-dark text-center pt-4">
-            {lista.map((item, i) => (
+            {store.project.map((item, i) => (
               <div className="col-12 col-md-6 col-lg-4 mb-5">
                 <div className="card">
                   <div className="card-body">
@@ -51,10 +48,10 @@ const BoardPortfolio = () => {
                   </ul>
                   <div className="card-body">
                     <button className="btn btn-warning me-1">
-                      <i class="bi bi-folder2-open"></i> Editar
+                      <i className="bi bi-folder2-open"></i> Editar
                     </button>
                     <button className="btn btn-danger ms-1" onClick={()=> deleteProject(item.id)}>
-                      <i class="bi bi-folder2-open"></i> Eliminar
+                      <i className="bi bi-folder2-open"></i> Eliminar
                     </button>
                   </div>
                 </div>

@@ -1,23 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect} from "react";
 import { Context } from "../store/appContext";
-
-/* import { Link } from "react-router-dom"; */
+import { Link } from "react-router-dom";
 
 export const Portfolio = (props) => {
 
-  let [lista, setLista] = useState([]);
+  const { store, actions } = useContext(Context);
+
   useEffect(() => {
-    fetchData();
+    actions.getProjects();
   }, []);
-  
-
-  const fetchData = async () => {
-    const data = await fetch("http://127.0.0.1:5000/api/projects/all");
-    const cancion = await data.json();
-    setLista(cancion);
-    console.log(cancion);
-  };
-
+  console.log(store.project);
 
   return (
     <>
@@ -29,24 +21,29 @@ export const Portfolio = (props) => {
             <i className="bi bi-archive h1"></i>
           </div>
           <div className="row text-dark text-center pt-4">
-            {lista.map((item, i) => (
-              <div className="col-12 col-md-6 col-lg-4 mb-5">
-                <div className="card" key={item.id}>
-                  <div className="card-body">
+            {store.project.map((item, i) => (
+              <div className="col-12 col-md-6 col-lg-4 mb-5" key={item.id}>
+                <div className="card">
+                  <div className="card-body"  >
                     <img src={item.project_image} className="img-fluid"></img>
                   </div>
-                  <ul className="list-group list-group-flush">
-                    <li className="list-group-item">
-                      User: {item.user.name}
-                    </li>
+                  <ul  className="list-group list-group-flush">
+                    <li  className="list-group-item">User: {item.user.name}</li>
                     <li className="list-group-item">
                       Project Name: {item.project_name}
                     </li>
                   </ul>
                   <div className="card-body">
-                    <button className="btn btn-success me-1">
-                      <i class="bi bi-folder2-open"></i> See Project
-                    </button>
+                    <Link
+                      className={
+                        "nav-link active" 
+                      }
+                      to="/project"
+                    >
+                      <button className="btn btn-success me-1">
+                        <i className="bi bi-folder2-open"></i> See Project
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>

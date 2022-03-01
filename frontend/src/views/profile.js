@@ -3,21 +3,14 @@ import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
 
 export const Profile = (props) => {
-  const { store, actions } = useContext(Context);
+  const {store} = useContext(Context);
   
   const history = useHistory();
 
-  const [nameProject, setNameProject] = useState("")
-  const [description, setDescription] = useState("")
-  const [imageProject, setImageProject] = useState("")
-
-
-
-
   const [state, setState] = useState({
-    project_name: null,
-    description: null,
-    project_image: null,
+    project_name: "",
+    description: "",
+    project_image: "",
     user_id: store.currentUser.user.id,
   });
 
@@ -36,6 +29,7 @@ export const Profile = (props) => {
       user_id: state.user_id,
     };
     saveUser(formData);
+    
   };
 
   const saveUser = async (form) => {
@@ -50,9 +44,10 @@ export const Profile = (props) => {
         },
       }
     );
-    const bebe = await res.json();
-    console.log(bebe);
+    const addProject = await res.json();
+    console.log(addProject);
     await getUser();
+    limpiar()
   };
 
   let [lista, setLista] = useState([]);
@@ -70,10 +65,16 @@ export const Profile = (props) => {
     );
     const cancion = await d.json();
     setLista(cancion);
-    /* .then(resp => resp.json())
-    .then(data => console.log(data))
-    .catch(error => console.log(error)); */
   };
+
+  const limpiar =()=>{
+    setState({
+      project_name: "",
+      description: "",
+      project_image: "",
+      user_id: store.currentUser.user.id,
+    })
+  }
 
   const deleteUser = async (id) => {
     const res = await fetch(`http://127.0.0.1:5000/api/user/${store.currentUser.user.id}/projects/${id}`,{
@@ -90,8 +91,6 @@ export const Profile = (props) => {
       console.log(data)
     
   }
-
-
 
   useEffect(() => {
     getUser();
@@ -113,7 +112,7 @@ export const Profile = (props) => {
             {({ store, actions }) => {
               return (
                 <>
-                  <div className="row text-dark text-center py-2">
+                  <div className="row text-dark text-center py-2" >
                     <div className="col-12 col-md-6 col-lg-4 mb-5 mx-auto">
                       <div className="card">
                         <div className="card-body">
@@ -155,6 +154,7 @@ export const Profile = (props) => {
                         className="form-control"
                         id="project_name"
                         name="project_name"
+                        value={state.project_name}
                         onChange={handleChange}
                       />
                     </div>
@@ -167,6 +167,7 @@ export const Profile = (props) => {
                         className="form-control"
                         id="description"
                         name="description"
+                        value={state.description}
                         onChange={handleChange}
                       />
                     </div>
@@ -180,6 +181,7 @@ export const Profile = (props) => {
                         aria-describedby="project_image"
                         id="project_image"
                         name="project_image"
+                        value={state.project_image}
                         onChange={handleChange}
                       />
                     </div>
@@ -203,7 +205,7 @@ export const Profile = (props) => {
                   </div>
                   <div className="row text-dark text-center pt-4">
                     {lista.map((item, i) => (
-                      <div className="col-12 col-md-6 col-lg-4 mb-5">
+                      <div className="col-12 col-md-6 col-lg-4 mb-5" key={item.id}>
                         <div className="card">
                           <div className="card-body">
                             <img
