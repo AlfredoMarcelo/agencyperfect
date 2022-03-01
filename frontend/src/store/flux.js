@@ -8,7 +8,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       isAuth: false,
       currentUser: null,
       profile: null,
-      project:[]
+      project:[],
+      singleProject:{}
     },
     actions: {
       isAuthenthicated: () => {
@@ -99,9 +100,21 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({isAuth : false})
         history.push("/")
       },
-      /* cambioPagina:(history)=>{
-        history.push("/");
-      } */
+      singleProject:(id)=>{
+        const actions = getActions()
+        const {apiUrl} = getStore()
+        fetch(`${apiUrl}/api/projects/${id}`,{
+          method:"GET",
+          headers:{"Content-type":"application/json"},
+        })
+          .then((resp)=>resp.json())
+          .then((response)=>{/* console.log(response) */actions.setterList(response)})
+      },
+      setterList:(response)=>{
+        const store = getStore()
+        setStore({singleProject:response})
+        console.log(store.singleProject)
+      }
     },
   };
 };

@@ -1,4 +1,3 @@
-from email.policy import default
 from flask import Flask, jsonify, render_template,request
 from flask_migrate import Migrate
 from flask_cors import CORS
@@ -125,6 +124,12 @@ def all_projects():
     projects = Project.query.all()
     projects = list(map(lambda project:project.serialize(),projects))
     return jsonify(projects), 200
+
+@app.route('/api/projects/<int:project_id>', methods=['GET'])
+def get_project(project_id):
+    project = Project.query.filter_by(id=project_id)
+    project = list(map(lambda single:single.serialize(),project))
+    return jsonify(project), 200
 
 @app.route("/api/user/<int:user_id>/projects", methods=['GET', 'POST'])
 @app.route("/api/user/<int:user_id>/projects/<int:project_id>", methods=['GET', 'PUT', 'DELETE'])

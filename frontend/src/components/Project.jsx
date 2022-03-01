@@ -4,7 +4,7 @@ import {useHistory } from "react-router-dom";
 
 export const Project = (props) => {
     
-  const {store} = useContext(Context);
+  const {store,actions} = useContext(Context);
 
   const history = useHistory();
 
@@ -13,13 +13,13 @@ export const Project = (props) => {
     if (!store.isAuth) history.push('/login')
   },[] )
 
-
+//no esta funcionando la extracción de datos de store.singleProject, error en promesa
   return (
     <>
       <main className="bg-dark text-white">
         <div className="container  mt-5 py-5">
           <div className="row text-center">
-            <p className="h1">Project : Educación</p>
+            <p className="h1">{store.singleProject.project_name}</p>
           </div>
           <div className="row mt-5">
             <div className="col-12 col-lg-4">

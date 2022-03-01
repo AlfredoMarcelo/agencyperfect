@@ -11,6 +11,11 @@ export const Portfolio = (props) => {
   }, []);
   console.log(store.project);
 
+  const sendId=(id)=>{
+    console.log(id)
+    actions.singleProject(id);
+  }
+
   return (
     <>
       <main className="bg-dark text-white mt-5 py-5">
@@ -40,7 +45,7 @@ export const Portfolio = (props) => {
                       }
                       to="/project"
                     >
-                      <button className="btn btn-success me-1">
+                      <button onClick={()=>sendId(item.id)} className="btn btn-success me-1">
                         <i className="bi bi-folder2-open"></i> See Project
                       </button>
                     </Link>
