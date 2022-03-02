@@ -1,18 +1,14 @@
 import { useContext} from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 const Navbar = (props) => {
   const location = useLocation()
   const {store,actions}=useContext(Context)
-  /* const history = useHistory() */
   
-
-
-  const cerrar=(/* history */)=>{
+  const cerrar=()=>{
     actions.cerrarSesion()
   }
-
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">

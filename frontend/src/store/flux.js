@@ -30,7 +30,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
           const { apiUrl, email, password } = getStore();
           const data = { email, password };
-          console.log(data);
           const resp = await fetch(`${apiUrl}/api/login`, {
             method: "POST",
             body: JSON.stringify(data),
@@ -95,7 +94,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({project : response})})
       },
       cerrarSesion:(history)=>{
-        /* const actions=getActions() */
         sessionStorage.clear()
         setStore({isAuth : false})
         history.push("/")
@@ -108,27 +106,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           headers:{"Content-type":"application/json"},
         })
           .then((resp)=>resp.json())
-          .then((response)=>{console.log(response) 
+          .then((response)=>{ 
             setStore({singleProject : response})})
       },
       ///SOLUCIONAR UPDATE, API FUNCIONANDO DE MANERA CORRECTA****************************************************
-      updateProject:(id,up)=>{
-        const{apiUrl,currentUser}=getStore
-        console.log(currentUser.user.id)
-
-        fetch(`${apiUrl}/api/user/${4}/projects/${id}`,{
-          method:"PUT",
-          body:JSON.stringify(up),
-          headers:{"Content-type":"application/json"},
-        })
-        .then(resp=>resp.json())
-        .then((response)=>console.log(response))
-          
-      }
-      /* setterList:(response)=>{
-        const store = getStore()
-        setStore({singleProject:response})
-        console.log(store.singleProject)} */
     },
   };
 };

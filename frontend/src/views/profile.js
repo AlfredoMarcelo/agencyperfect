@@ -104,7 +104,6 @@ export const Profile = (props) => {
         user_id: store.currentUser.user.id
     });
     setBoton(false)
-    console.log(boton)
     setIdProject(id)
   };
 
@@ -117,15 +116,31 @@ export const Profile = (props) => {
       project_image: state.project_image,
       user_id: state.user_id,
     };
-    upProject(formData);
+    actualizar(formData);
+    limpiar()
   };
-  
 
-  const upProject=(up)=>{
-    actions.updateProject(up)
-    getUser()
+  const actualizar = (setter) => {
+    fetch(`//127.0.0.1:5000/api/user/${store.currentUser.user.id}/projects/${idproject}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(setter),
+    })
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
 
-  }
+      getUser()
+  };
 
 
   useEffect(() => {
@@ -144,7 +159,7 @@ export const Profile = (props) => {
             <p className="h1">Profile</p>
           </div>
           <Context.Consumer>
-            {({ store, actions }) => {
+            {({ store}) => {
               return (
                 <>
                   <div className="row text-dark text-center py-2">
@@ -165,11 +180,6 @@ export const Profile = (props) => {
                             Email: {store.currentUser.user.email}{" "}
                           </li>
                         </ul>
-                        <div className="card-body">
-                          <button className="btn btn-outline-dark">
-                            Ver más
-                          </button>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -207,15 +217,6 @@ export const Profile = (props) => {
                           onChange={handleChange}
                         >
                         </textarea>
-                      {/* <input
-                        type="text"
-                        className="form-control"
-                        id="description"
-                        name="description"
-                        value={state.description}
-                        onChange={handleChange}
-                        style={{ height: 100 }}
-                      /> */}
                     </div>
                     <div className="mb-3">
                       <label htmlFor="project_image" className="form-label">
@@ -276,15 +277,6 @@ export const Profile = (props) => {
                         onChange={handleChange}
                       >
                       </textarea>
-                    {/* <input
-                      type="text"
-                      className="form-control"
-                      id="description"
-                      name="description"
-                      value={state.description}
-                      onChange={handleChange}
-                      style={{ height: 100 }}
-                    /> */}
                   </div>
                   <div className="mb-3">
                     <label htmlFor="project_image" className="form-label">
