@@ -101,7 +101,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         history.push("/")
       },
       singleProject:(id)=>{
-        const actions = getActions()
+        
         const {apiUrl} = getStore()
         fetch(`${apiUrl}/api/projects/${id}`,{
           method:"GET",
@@ -111,11 +111,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response)=>{console.log(response) 
             setStore({singleProject : response})})
       },
+      ///SOLUCIONAR UPDATE, API FUNCIONANDO DE MANERA CORRECTA****************************************************
+      updateProject:(id,up)=>{
+        const{apiUrl,currentUser}=getStore
+        console.log(currentUser.user.id)
+
+        fetch(`${apiUrl}/api/user/${4}/projects/${id}`,{
+          method:"PUT",
+          body:JSON.stringify(up),
+          headers:{"Content-type":"application/json"},
+        })
+        .then(resp=>resp.json())
+        .then((response)=>console.log(response))
+          
+      }
       /* setterList:(response)=>{
         const store = getStore()
         setStore({singleProject:response})
         console.log(store.singleProject)} */
-      
     },
   };
 };
