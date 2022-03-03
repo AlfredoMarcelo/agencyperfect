@@ -14,14 +14,12 @@ import HomeAdmin from "./components/HomeAdmin";
 import BoardPortfolio from "./views/BoardPortfolio";
 import BoardUser from "./views/BoardUser";
 import { useContext } from "react";
+import Privada from "./components/Privada";
 
 
 const Layout = () => {
 
-
   const {store}=useContext(Context)
-
-
 
   return (
     <BrowserRouter>
@@ -30,11 +28,11 @@ const Layout = () => {
           <Route exact path="/admin" component={HomeAdmin}/>
           <Route exact path="/" component={Home}/>
           <Route exact path="/login" component={Login}/>
-          <Route exact path="/profile" component={Profile}/>
+          <Privada path="/profile" component={()=> <Profile /> } />
           <Route exact path="/portfolio" component={Portfolio}/>
           <Route exact path="/project" component={Project}/>
           <Route exact path="/register" component={Register}/>
-          <Route exact path="/boardPortfolio" component={BoardPortfolio}/>
+          <Privada path="/boardPortfolio" component={()=> <BoardPortfolio /> } />
           <Route exact path="/boardUser" component={BoardUser}/>
           <Route exact path="*" component={NotFound}/>
       </Switch>
