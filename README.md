@@ -1,6 +1,7 @@
 # Agency Perfect
 
-_Agency Perfect permite que los desarrolladores puedan dar a conocer sus proyectos web._
+_Agency Perfect permite que los desarrolladores puedan dar a conocer sus proyectos web.
+Tienes a disposición dos carpetas backend, frontend📁 y comienza a ver el proyecto 🤳🏽 ._
 
 ## Comenzando 🚀
 
