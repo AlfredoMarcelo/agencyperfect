@@ -4,14 +4,12 @@ _Agency Perfect permite que los desarrolladores puedan dar a conocer sus proyect
 
 ## Comenzando 🚀
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
-
-Mira **Deployment** para conocer como desplegar el proyecto.
+_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local._
 
 
 ### Pre-requisitos 📋
 
-_Para ejectuar el proyecto necesitaras:
+Para ejectuar el proyecto necesitaras:
 
 ```
 instalar npm
